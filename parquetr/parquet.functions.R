@@ -10,7 +10,6 @@ fileMetaData <- function(filehandle, size) {
     seek(filehandle, size - 8)
     footerLength <- readBin(filehandle, integer(), n = 1, size = 4, endian = "little")
     pos <- size - 8 - footerLength
-    print(pos)
     thrift.filemetadata(filehandle, pos)$version
 }
 
@@ -23,7 +22,6 @@ read.parquet <- function(filename) {
         stop("Error: not a valid parquet file")
     }
     metadata <- fileMetaData(parquetFile, size)
-    print(metadata)
     close(parquetFile)
 }
 
